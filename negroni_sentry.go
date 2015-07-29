@@ -20,7 +20,7 @@ type Recovery struct {
 }
 
 // NewRecovery returns a new instance of Recovery
-func NewRecovery(dsn string) *Recovery {
+func NewRecovery(printStack bool, dsn string) *Recovery {
 	logger := log.New(os.Stdout, "[negroni] ", 0)
 	//init sentry client
 	client, err := raven.NewClient(dsn, nil)
@@ -29,7 +29,7 @@ func NewRecovery(dsn string) *Recovery {
 	}
 	return &Recovery{
 		Logger:     logger,
-		PrintStack: true,
+		PrintStack: printStack,
 		StackAll:   false,
 		StackSize:  1024 * 8,
 		SentryCli:  client,
